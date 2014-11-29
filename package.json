@@ -1,0 +1,13 @@
+{
+  "name": "Chat Application",
+  "version": "0.0.1",
+  "author": "Steven Chen",
+  "description": "A very minimal chat application in Node.js with Socket.io",
+  "dependencies": {
+    "express": "^4.10.4",
+    "jade": "^1.8.0",
+    "mongodb": "^1.4.22",
+    "mongoose": "^3.8.19",
+    "socket.io": "^1.2.1"
+  }
+}
