@@ -15,7 +15,7 @@ This is a boilerplate chat application using:
 - Create rooms
 - Show chat date
 
-#### Installation
+### Installation
 
 ##### Clone the repository
     git clone git@github.com:chensteven/chat-boilerplate.git
