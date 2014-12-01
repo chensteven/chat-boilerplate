@@ -8,10 +8,14 @@ var dbConfig = require('./config/database.js');
 var Message = require('./app/models/message.js');
 
 // Settings
+app.set('port', process.env.PORT || 3001);
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
+// Controllers
+
+var homeController = require('./controllers/index');
 
 // Database + Socket
 mongoose.connect(dbConfig.url, function(err) {
@@ -28,6 +32,7 @@ mongoose.connect(dbConfig.url, function(err) {
 		// Emitting all messages upon connection
 		Message.find().limit(100).sort({_id: 1}).exec(function(err, res) {
 			if(err) throw err;
+			// Emitting sorted data from database
 			socket.emit('output', res);
 		});
 		// Waiting for user input
@@ -46,12 +51,14 @@ mongoose.connect(dbConfig.url, function(err) {
 			}
 			else {
 				message.save(function(err) {
-					if (err) console.log('Error in insertion');
+					if (err) console.log('Error in saving data');
+
+					// Server message
 					console.log('Message saved');
 
-					// Emit latest messgage to all clients
+					// Emit the latest saved messgage to all clients
 					client.emit('output', [data]);
-					// Send status when object is saved on the server
+					// Send chat status when object is saved on the server
 				 	sendStatus({
 				 		message: 'Message sent',
 				 		clear: true
@@ -63,10 +70,10 @@ mongoose.connect(dbConfig.url, function(err) {
 });
 
 // Routes
-require('./app/routes/route')(app);
+app.get('/', homeController.index);
 
-var port = 3031;
-app.listen(port, function(err) {
+
+app.listen(app.get('port'), function(err) {
 	if (err) throw err;
-	console.log('Express Server is now listening to ' + port);
+	console.log('Express Server is now listening to ' + app.get('port'));
 })

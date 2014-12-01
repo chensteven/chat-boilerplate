@@ -1,5 +1,4 @@
 {
-  "name": "Chat Application",
   "version": "0.0.1",
   "author": "Steven Chen",
   "description": "A very minimal chat application in Node.js with Socket.io",
@@ -8,6 +7,12 @@
     "jade": "^1.8.0",
     "mongodb": "^1.4.22",
     "mongoose": "^3.8.19",
-    "socket.io": "^1.2.1"
+    "socket.io": "^1.2.1",
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1"
   }
 }
